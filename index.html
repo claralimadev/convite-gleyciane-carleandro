@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="narrative">
+  <meta name="design-style" content="sonnet">
+  <title>Convite de Casamento — Gleyciane e Carleandro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* 1. Sonnet base structure adapted to the requested white & blue palette */
+      --background: #f8fafd;               /* porcelain off-white paper */
+      --surface-container-low: #ffffff;    /* crisp invitation card white */
+      --surface-container: #edf4fb;        /* soft celeste wash */
+      --surface-container-high: #dfecf7;   /* deeper mist blue */
+
+      /* Ink */
+      --on-surface: #122645;               /* deep navy ink */
+      --on-surface-variant: #3b5578;       /* muted slate-navy */
+
+      /* Rules & borders */
+      --outline: #5f97c2;                  /* sky-blue frame hairline */
+      --outline-variant: #d2e3f1;          /* pale ice-blue divider */
+
+      /* Accents */
+      --primary: #173660;                  /* azul-marinho (primary action) */
+      --primary-hover: #0f2647;
+      --on-primary: #ffffff;
+      --primary-container: #e6f1fa;
+      --on-primary-container: #122a4d;
+      --secondary: #156e7a;                /* azul-turquesa (accessible ≥ 4.5:1) */
+      --secondary-soft: #2e9aa8;           /* turquoise botanical wash */
+      --tertiary: #7bb9e0;                 /* azul-celeste (ornament & watercolor) */
+      --tertiary-pale: #b7daf0;            /* pale celeste watercolor petal */
+      --error: #9b2c2c;
+      --on-error: #ffffff;
+
+      /* Data / ornament series */
+      --data-1: #173660;
+      --data-2: #156e7a;
+      --data-3: #7bb9e0;
+      --data-4: #4577a6;
+      --data-context: #c7d9ea;
+
+      /* Typography */
+      --font-headline: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Cormorant Garamond', Georgia, serif;
+      --font-label: 'Cormorant Garamond', Georgia, serif;
+      --font-script: 'Great Vibes', cursive;
+
+      /* Shape */
+      --rounded: 2px;
+      --rounded-lg: 4px;
+      --rounded-full: 9999px;
+
+      /* Style effects */
+      --frame-rule: 1px solid var(--outline);
+      --hairline-rule: 1px solid var(--outline-variant);
+      --frame-inset: 6px;
+      --paper-vignette: inset 0 0 80px rgb(95 151 194 / 0.10);
+      --card-shadow: 0 14px 40px rgb(18 38 69 / 0.06);
+      --btn-hover-shadow: 0 6px 18px rgb(23 54 96 / 0.18);
+      --ambient-wash-1: rgb(123 185 224 / 0.16);
+      --ambient-wash-2: rgb(21 110 122 / 0.10);
+      --ambient-wash-3: rgb(183 218 240 / 0.20);
+
+      /* 3. Shared tokens */
+      --positive: #156e7a;
+      --positive-bg: #e4f4f6;
+      --warning: #8a5b1a;
+      --focus: #173660;
+
+      /* Type scale (Narrative — stepped up for Cormorant Garamond's classic x-height) */
+      --display-size: clamp(2.85rem, 2rem + 3.2vw, 4.35rem);
+      --headline-size: clamp(1.75rem, 1.35rem + 1.4vw, 2.35rem);
+      --subhead-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --body-size: clamp(1.125rem, 1.05rem + 0.25vw, 1.25rem);
+      --label-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.85rem);
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 140ms;
+      --dur-short: 240ms;
+      --dur-long: 460ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-lg) var(--space-md);
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Subtle watercolor ambient washes on the background */
+    .ambient-wash {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 12% 14%, var(--ambient-wash-1) 0%, transparent 42%),
+        radial-gradient(circle at 88% 84%, var(--ambient-wash-2) 0%, transparent 45%),
+        radial-gradient(circle at 85% 15%, var(--ambient-wash-3) 0%, transparent 36%);
+    }
+
+    /* Main folio shell */
+    .invitation-shell {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    /* Step progress navigation bar */
+    .step-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      padding-block: var(--space-xs);
+    }
+
+    .step-pill {
+      appearance: none;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--rounded-full);
+      color: var(--on-surface-variant);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: var(--space-xs) var(--space-md);
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      cursor: pointer;
+      transition: color var(--dur-short) var(--ease-out),
+                  background-color var(--dur-short) var(--ease-out),
+                  border-color var(--dur-short) var(--ease-out);
+    }
+
+    .step-pill:hover {
+      color: var(--primary);
+      background-color: var(--surface-container);
+    }
+
+    .step-pill[aria-current="step"] {
+      color: var(--primary);
+      background-color: var(--surface-container-low);
+      border-color: var(--outline);
+    }
+
+    .step-sep {
+      color: var(--outline);
+      user-select: none;
+      font-size: var(--label-size);
+    }
+
+    /* Stage & Page transitions */
+    .pages-stage {
+      position: relative;
+      width: 100%;
+    }
+
+    .invitation-page {
+      background-color: var(--surface-container-low);
+      box-shadow: var(--paper-vignette), var(--card-shadow);
+      border: var(--frame-rule);
+      outline: var(--frame-rule);
+      outline-offset: calc(-1 * var(--frame-inset));
+      padding: var(--space-2xl) var(--space-xl);
+      position: relative;
+      overflow: hidden;
+      display: none;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity var(--dur-long) var(--ease-out),
+                  transform var(--dur-long) var(--ease-out);
+      container-type: inline-size;
+    }
+
+    .invitation-page.is-active {
+      display: block;
+    }
+
+    .invitation-page.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Corner botanical ornaments */
+    .corner-branch {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.92;
+      z-index: 0;
+    }
+
+    .corner-branch--tl {
+      top: 0;
+      left: 0;
+      width: clamp(130px, 28%, 195px);
+      height: auto;
+    }
+
+    .corner-branch--br {
+      bottom: 0;
+      right: 0;
+      width: clamp(130px, 28%, 195px);
+      height: auto;
+      transform: rotate(180deg);
+    }
+
+    /* SVG watercolor gradient stop classes (no inline hex in body) */
+    .stop-celeste-light { stop-color: var(--tertiary-pale); stop-opacity: 0.72; }
+    .stop-celeste { stop-color: var(--tertiary); stop-opacity: 0.86; }
+    .stop-turquesa { stop-color: var(--secondary-soft); stop-opacity: 0.78; }
+    .stop-turquesa-deep { stop-color: var(--secondary); stop-opacity: 0.84; }
+    .stop-marinho { stop-color: var(--primary); stop-opacity: 0.85; }
+    .stop-fade { stop-color: var(--surface-container-low); stop-opacity: 0.1; }
+
+    .stem-stroke {
+      stroke: var(--on-surface-variant);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .vein-stroke {
+      stroke: var(--primary);
+      stroke-opacity: 0.28;
+      stroke-linecap: round;
+      fill: none;
+    }
+
+    .blossom-center {
+      fill: var(--primary);
+      fill-opacity: 0.65;
+    }
+
+    /* Page inner layout */
+    .page-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: var(--space-lg);
+    }
+
+    /* Discrete top bar inside Pages 2 & 3 */
+    .page-topbar {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xs);
+    }
+
+    .btn-back {
+      appearance: none;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--rounded);
+      color: var(--on-surface-variant);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: var(--space-xs) var(--space-sm);
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      cursor: pointer;
+      transition: color var(--dur-micro) var(--ease-out),
+                  background-color var(--dur-micro) var(--ease-out);
+    }
+
+    .btn-back:hover {
+      color: var(--primary);
+      background-color: var(--surface-container);
+    }
+
+    .page-kicker {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin: 0;
+    }
+
+    /* Monogram crest on Page 1 */
+    .monogram-crest {
+      width: 104px;
+      height: 104px;
+      border-radius: var(--rounded-full);
+      border: 1px solid var(--outline);
+      outline: 1px solid var(--outline-variant);
+      outline-offset: 4px;
+      background: radial-gradient(circle at 50% 40%, var(--surface-container-low) 0%, var(--surface-container) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: var(--space-md);
+    }
+
+    .monogram-letters {
+      font-family: var(--font-script);
+      font-size: 2.15rem;
+      color: var(--primary);
+      line-height: 1;
+      padding-top: 0.12em;
+    }
+
+    .cover-wrap {
+      padding-block: var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-lg);
+      max-width: 34ch;
+    }
+
+    .cover-quote {
+      font-family: var(--font-headline);
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(1.8rem, 1.3rem + 1.8vw, 2.5rem);
+      line-height: 1.28;
+      color: var(--on-surface);
+      margin: 0;
+    }
+
+    .hairline-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-md);
+      width: 100%;
+      max-width: 240px;
+    }
+
+    .hairline-ornament span {
+      flex: 1;
+      height: 1px;
+      background-color: var(--outline-variant);
+    }
+
+    .diamond-mark {
+      width: 7px;
+      height: 7px;
+      border: 1px solid var(--outline);
+      transform: rotate(45deg);
+      background-color: var(--surface-container);
+      flex: 0 0 auto;
+    }
+
+    /* Buttons */
+    .btn-primary,
+    .btn-secondary {
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      appearance: none;
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border: 1px solid var(--primary);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.875rem var(--space-xl);
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      cursor: pointer;
+      transition: background-color var(--dur-short) var(--ease-out),
+                  transform var(--dur-micro) var(--ease-out),
+                  box-shadow var(--dur-short) var(--ease-out);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      box-shadow: var(--btn-hover-shadow);
+    }
+
+    .btn-primary:active {
+      transform: translateY(1px);
+    }
+
+    .btn-secondary {
+      appearance: none;
+      background-color: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.75rem var(--space-lg);
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      cursor: pointer;
+      transition: background-color var(--dur-short) var(--ease-out),
+                  color var(--dur-short) var(--ease-out);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary);
+      color: var(--on-primary);
+    }
+
+    .btn-teal {
+      appearance: none;
+      background-color: var(--secondary);
+      color: var(--on-primary);
+      border: 1px solid var(--secondary);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.75rem var(--space-lg);
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      cursor: pointer;
+      transition: background-color var(--dur-short) var(--ease-out),
+                  transform var(--dur-micro) var(--ease-out);
+    }
+
+    .btn-teal:hover {
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .btn-discrete {
+      appearance: none;
+      background-color: transparent;
+      color: var(--primary);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.7rem var(--space-xl);
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      cursor: pointer;
+      transition: background-color var(--dur-short) var(--ease-out),
+                  color var(--dur-short) var(--ease-out),
+                  border-color var(--dur-short) var(--ease-out);
+    }
+
+    .btn-discrete:hover {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .btn-success-state {
+      background-color: var(--positive) !important;
+      border-color: var(--positive) !important;
+      color: var(--on-primary) !important;
+    }
+
+    /* Accessible focus rings */
+    button:focus-visible,
+    input:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Page 2 — Invitation typography & botanical center */
+    .botanical-crown {
+      width: min(100%, 340px);
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .invite-lead {
+      font-family: var(--font-headline);
+      font-style: italic;
+      font-size: var(--subhead-size);
+      color: var(--secondary);
+      margin: 0;
+      max-width: 34ch;
+      line-height: 1.45;
+    }
+
+    .blessing-line {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+      margin: 0;
+    }
+
+    .couple-names {
+      font-family: var(--font-script);
+      font-weight: 400;
+      font-size: var(--display-size);
+      line-height: 1.15;
+      color: var(--primary);
+      margin: var(--space-xs) 0;
+      padding-inline: var(--space-sm);
+    }
+
+    .couple-amp {
+      font-family: var(--font-headline);
+      font-style: italic;
+      font-size: 0.68em;
+      color: var(--secondary);
+      margin-inline: 0.08em;
+    }
+
+    .event-copy {
+      font-family: var(--font-body);
+      font-size: clamp(1.18rem, 1.1rem + 0.35vw, 1.35rem);
+      line-height: 1.65;
+      color: var(--on-surface);
+      max-width: 40ch;
+      margin: 0 auto;
+    }
+
+    /* Key event details strip */
+    .details-strip {
+      width: 100%;
+      border-block: var(--hairline-rule);
+      padding-block: var(--space-md);
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    .detail-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .detail-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--secondary);
+    }
+
+    .detail-value {
+      font-family: var(--font-headline);
+      font-size: clamp(1.125rem, 1rem + 0.4vw, 1.3rem);
+      font-weight: 500;
+      color: var(--on-surface);
+    }
+
+    /* Page 3 — Three interactive sections */
+    .page3-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-sm);
+      width: 100%;
+    }
+
+    .page3-title {
+      font-family: var(--font-headline);
+      font-style: italic;
+      font-weight: 500;
+      font-size: var(--headline-size);
+      color: var(--primary);
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .action-stack {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+      text-align: center;
+    }
+
+    .action-block {
+      border-top: var(--hairline-rule);
+      padding-top: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .action-block:first-child {
+      border-top: none;
+      padding-top: var(--space-sm);
+    }
+
+    .block-heading {
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin: 0;
+    }
+
+    .block-desc {
+      margin: 0;
+      color: var(--on-surface-variant);
+      max-width: 44ch;
+      line-height: 1.55;
+    }
+
+    /* Expandable inline drawers for WhatsApp RSVP & Location */
+    .inline-drawer {
+      width: 100%;
+      max-width: 480px;
+      background-color: var(--surface-container);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-md);
+      text-align: center;
+      margin-top: var(--space-xs);
+    }
+
+    .inline-drawer.is-open {
+      display: flex;
+      animation: drawerIn var(--dur-short) var(--ease-out) forwards;
+    }
+
+    @keyframes drawerIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .drawer-field-group {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-xs);
+      text-align: left;
+    }
+
+    .field-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+    }
+
+    .text-input {
+      width: 100%;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      font-family: var(--font-body);
+      font-size: 1.0625rem;
+      color: var(--on-surface);
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+    }
+
+    .message-preview {
+      width: 100%;
+      background-color: var(--surface-container-low);
+      border-left: 2px solid var(--secondary);
+      padding: var(--space-sm) var(--space-md);
+      text-align: left;
+      font-style: italic;
+      color: var(--on-surface);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .reference-chip {
+      font-family: var(--font-label);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--primary);
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-xs) var(--space-md);
+      user-select: all;
+      word-break: break-all;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-sm);
+      width: 100%;
+    }
+
+    /* PIX card */
+    .pix-plate {
+      width: 100%;
+      max-width: 440px;
+      background-color: var(--surface-container);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg) var(--space-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .pix-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-md);
+      padding-bottom: var(--space-sm);
+      border-bottom: var(--hairline-rule);
+    }
+
+    .pix-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .pix-key-value {
+      font-family: var(--font-headline);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: 0.02em;
+      user-select: all;
+    }
+
+    .feedback-msg {
+      min-height: 1.4em;
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--positive);
+      margin: 0;
+      opacity: 0;
+      transition: opacity var(--dur-short) var(--ease-out);
+    }
+
+    .feedback-msg.is-shown {
+      opacity: 1;
+    }
+
+    /* Stylized venue plaque inside Location drawer */
+    .venue-pin-badge {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--rounded-full);
+      background-color: var(--primary-container);
+      border: 1px solid var(--outline);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+    }
+
+    .page3-footer {
+      border-top: var(--hairline-rule);
+      padding-top: var(--space-lg);
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .footer-script {
+      font-family: var(--font-script);
+      font-size: 2rem;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    .icon-inline {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    /* Container-level responsiveness */
+    @container (max-width: 460px) {
+      .details-strip {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+      }
+
+      .pix-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+      }
+    }
+
+    /* Mobile breakpoint */
+    @media (max-width: 640px) {
+      body {
+        padding: var(--space-sm);
+      }
+
+      .invitation-page {
+        padding: var(--space-xl) var(--space-md);
+      }
+
+      .cover-wrap {
+        padding-block: var(--space-lg);
+      }
+
+      .btn-primary,
+      .btn-secondary,
+      .btn-teal,
+      .btn-discrete {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-wash" aria-hidden="true"></div>
+
+  <div class="invitation-shell">
+    <!-- Subtle top step navigation -->
+    <nav class="step-nav" aria-label="Etapas do convite">
+      <button type="button" class="step-pill" id="nav-step-1" aria-current="step" onclick="goToPage(1)">
+        1 · Capa
+      </button>
+      <span class="step-sep" aria-hidden="true">·</span>
+      <button type="button" class="step-pill" id="nav-step-2" onclick="goToPage(2)">
+        2 · Convite
+      </button>
+      <span class="step-sep" aria-hidden="true">·</span>
+      <button type="button" class="step-pill" id="nav-step-3" onclick="goToPage(3)">
+        3 · Confirmação
+      </button>
+    </nav>
+
+    <main class="pages-stage">
+      <!-- ==================== PÁGINA 1 — CAPA ==================== -->
+      <section class="invitation-page is-active is-visible" id="page-1" aria-label="Capa do convite">
+        <!-- Delicate corner watercolor sprig (top-left) -->
+        <svg class="corner-branch corner-branch--tl" viewBox="0 0 220 220" aria-hidden="true">
+          <defs>
+            <linearGradient id="wc-leaf-a1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" class="stop-celeste-light" />
+              <stop offset="60%" class="stop-celeste" />
+              <stop offset="100%" class="stop-turquesa" />
+            </linearGradient>
+            <linearGradient id="wc-leaf-b1" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" class="stop-turquesa" />
+              <stop offset="75%" class="stop-marinho" />
+            </linearGradient>
+          </defs>
+          <path class="stem-stroke" stroke-width="1.3" d="M 12,18 C 52,32 95,62 146,112" />
+          <path class="stem-stroke" stroke-width="1" d="M 54,42 C 62,18 82,12 104,16" />
+          <path class="stem-stroke" stroke-width="1" d="M 88,66 C 68,84 58,108 62,130" />
+          <ellipse cx="42" cy="18" rx="18" ry="8" transform="rotate(-24 42 18)" fill="url(#wc-leaf-a1)" />
+          <ellipse cx="86" cy="18" rx="20" ry="8.5" transform="rotate(14 86 18)" fill="url(#wc-leaf-b1)" />
+          <ellipse cx="116" cy="48" rx="19" ry="8" transform="rotate(-18 116 48)" fill="url(#wc-leaf-a1)" />
+          <ellipse cx="64" cy="96" rx="20" ry="8.5" transform="rotate(-54 64 96)" fill="url(#wc-leaf-b1)" />
+          <ellipse cx="30" cy="64" rx="17" ry="7.5" transform="rotate(32 30 64)" fill="url(#wc-leaf-a1)" />
+          <circle cx="148" cy="114" r="6" fill="url(#wc-leaf-a1)" />
+          <circle cx="148" cy="114" r="2.2" class="blossom-center" />
+          <circle cx="108" cy="18" r="4.5" fill="url(#wc-leaf-b1)" />
+        </svg>
+
+        <!-- Delicate corner watercolor sprig (bottom-right) -->
+        <svg class="corner-branch corner-branch--br" viewBox="0 0 220 220" aria-hidden="true">
+          <path class="stem-stroke" stroke-width="1.3" d="M 12,18 C 52,32 95,62 146,112" />
+          <path class="stem-stroke" stroke-width="1" d="M 54,42 C 62,18 82,12 104,16" />
+          <path class="stem-stroke" stroke-width="1" d="M 88,66 C 68,84 58,108 62,130" />
+          <ellipse cx="42" cy="18" rx="18" ry="8" transform="rotate(-24 42 18)" fill="url(#wc-leaf-a1)" />
+          <ellipse cx="86" cy="18" rx="20" ry="8.5" transform="rotate(14 86 18)" fill="url(#wc-leaf-b1)" />
+          <ellipse cx="116" cy="48" rx="19" ry="8" transform="rotate(-18 116 48)" fill="url(#wc-leaf-a1)" />
+          <ellipse cx="64" cy="96" rx="20" ry="8.5" transform="rotate(-54 64 96)" fill="url(#wc-leaf-b1)" />
+          <circle cx="148" cy="114" r="6" fill="url(#wc-leaf-a1)" />
+          <circle cx="148" cy="114" r="2.2" class="blossom-center" />
+        </svg>
+
+        <div class="page-content">
+          <div class="cover-wrap">
+            <div class="monogram-crest" aria-hidden="true">
+              <span class="monogram-letters">G &amp; C</span>
+            </div>
+
+            <p class="page-kicker">Convite Digital</p>
+
+            <h1 class="cover-quote">
+              Você está sendo convidado para celebrar o amor!
+            </h1>
+
+            <div class="hairline-ornament" aria-hidden="true">
+              <span></span>
+              <div class="diamond-mark"></div>
+              <span></span>
+            </div>
+
+            <button type="button" class="btn-primary" id="btn-open-invite" onclick="goToPage(2)">
+              TOQUE AQUI PARA ABRIR
+              <svg class="icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </button>
+
+            <p class="page-kicker">04 de dezembro · Espaço Viv'ana</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PÁGINA 2 — CONVITE DE CASAMENTO ==================== -->
+      <section class="invitation-page" id="page-2" aria-label="Convite de casamento" aria-hidden="true">
+        <div class="page-content">
+          <div class="page-topbar">
+            <button type="button" class="btn-back" id="btn-back-to-1" onclick="goToPage(1)">
+              <svg class="icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M19 12H5M11 18l-6-6 6-6" />
+              </svg>
+              Voltar
+            </button>
+            <span class="page-kicker">Convite</span>
+          </div>
+
+          <!-- Ramo azul em aquarela (elemento decorativo principal) -->
+          <svg class="botanical-crown" viewBox="0 0 420 140" aria-hidden="true">
+            <defs>
+              <radialGradient id="wc-wash-center" cx="50%" cy="55%" r="50%">
+                <stop offset="0%" class="stop-celeste-light" />
+                <stop offset="100%" class="stop-fade" />
+              </radialGradient>
+              <linearGradient id="wc-branch-celeste" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" class="stop-celeste-light" />
+                <stop offset="55%" class="stop-celeste" />
+                <stop offset="100%" class="stop-turquesa" />
+              </linearGradient>
+              <linearGradient id="wc-branch-marinho" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" class="stop-turquesa" />
+                <stop offset="65%" class="stop-turquesa-deep" />
+                <stop offset="100%" class="stop-marinho" />
+              </linearGradient>
+            </defs>
+
+            <!-- Soft watercolor aura -->
+            <ellipse cx="210" cy="72" rx="165" ry="42" fill="url(#wc-wash-center)" />
+
+            <!-- Graceful arched main stems -->
+            <path class="stem-stroke" stroke-width="1.4" d="M 38,94 C 102,88 158,68 210,48 C 262,68 318,88 382,94" />
+            <path class="stem-stroke" stroke-width="1" d="M 105,82 C 122,58 148,42 178,34" />
+            <path class="stem-stroke" stroke-width="1" d="M 315,82 C 298,58 272,42 242,34" />
+
+            <!-- Left leaves (celeste, turquesa & marinho watercolor layering) -->
+            <path d="M 52,92 C 36,76 40,56 64,62 C 74,76 68,88 52,92 Z" fill="url(#wc-branch-celeste)" />
+            <path d="M 84,86 C 68,66 74,44 100,54 C 108,70 100,82 84,86 Z" fill="url(#wc-branch-marinho)" />
+            <path d="M 118,74 C 102,94 114,114 134,98 C 138,84 130,76 118,74 Z" fill="url(#wc-branch-celeste)" />
+            <path d="M 142,48 C 126,26 144,12 162,28 C 164,42 154,48 142,48 Z" fill="url(#wc-branch-celeste)" />
+            <path d="M 166,58 C 160,34 182,24 192,46 C 188,58 176,62 166,58 Z" fill="url(#wc-branch-marinho)" />
+            <path d="M 148,68 C 142,92 162,108 174,88 C 174,74 162,68 148,68 Z" fill="url(#wc-branch-marinho)" />
+
+            <!-- Right leaves (mirrored botanical balance) -->
+            <path d="M 368,92 C 384,76 380,56 356,62 C 346,76 352,88 368,92 Z" fill="url(#wc-branch-celeste)" />
+            <path d="M 336,86 C 352,66 346,44 320,54 C 312,70 320,82 336,86 Z" fill="url(#wc-branch-marinho)" />
+            <path d="M 302,74 C 318,94 306,114 286,98 C 282,84 290,76 302,74 Z" fill="url(#wc-branch-celeste)" />
+            <path d="M 278,48 C 294,26 276,12 258,28 C 256,42 266,48 278,48 Z" fill="url(#wc-branch-celeste)" />
+            <path d="M 254,58 C 260,34 238,24 228,46 C 232,58 244,62 254,58 Z" fill="url(#wc-branch-marinho)" />
+            <path d="M 272,68 C 278,92 258,108 246,88 C 246,74 258,68 272,68 Z" fill="url(#wc-branch-marinho)" />
+
+            <!-- Delicate watercolor blue blossoms at center -->
+            <circle cx="210" cy="40" r="10" fill="url(#wc-branch-celeste)" />
+            <circle cx="201" cy="48" r="8" fill="url(#wc-branch-celeste)" />
+            <circle cx="219" cy="48" r="8" fill="url(#wc-branch-celeste)" />
+            <circle cx="210" cy="54" r="7" fill="url(#wc-branch-marinho)" />
+            <circle cx="210" cy="47" r="3" class="blossom-center" />
+
+            <!-- Tiny buds -->
+            <circle cx="34" cy="95" r="3.5" fill="url(#wc-branch-celeste)" />
+            <circle cx="386" cy="95" r="3.5" fill="url(#wc-branch-celeste)" />
+            <circle cx="182" cy="31" r="3" fill="url(#wc-branch-marinho)" />
+            <circle cx="238" cy="31" r="3" fill="url(#wc-branch-marinho)" />
+          </svg>
+
+          <p class="invite-lead">
+            Venha celebrar nosso amor e fazer parte da nossa história
+          </p>
+
+          <p class="blessing-line">Com a bênção de Deus</p>
+
+          <h2 class="couple-names">
+            Gleyciane <span class="couple-amp">e</span> Carleandro
+          </h2>
+
+          <div class="hairline-ornament" aria-hidden="true">
+            <span></span>
+            <div class="diamond-mark"></div>
+            <span></span>
+          </div>
+
+          <p class="event-copy">
+            Convidam para seu jantar de casamento, que irá se realizar no dia 04 de dezembro, às 19:30 horas, no Espaço Viv'ana.
+          </p>
+
+          <div class="details-strip" aria-label="Resumo do evento">
+            <div class="detail-cell">
+              <span class="detail-label">Data</span>
+              <span class="detail-value">04 de Dezembro</span>
+            </div>
+            <div class="detail-cell">
+              <span class="detail-label">Horário</span>
+              <span class="detail-value">19:30 horas</span>
+            </div>
+            <div class="detail-cell">
+              <span class="detail-label">Local</span>
+              <span class="detail-value">Espaço Viv'ana</span>
+            </div>
+          </div>
+
+          <button type="button" class="btn-discrete" id="btn-continue-to-3" onclick="goToPage(3)">
+            CONTINUAR
+            <svg class="icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================== PÁGINA 3 — CONFIRMAÇÃO, LOCALIZAÇÃO E PRESENTES ==================== -->
+      <section class="invitation-page" id="page-3" aria-label="Confirmação, localização e presentes" aria-hidden="true">
+        <div class="page-content">
+          <div class="page-topbar">
+            <button type="button" class="btn-back" id="btn-back-to-2" onclick="goToPage(2)">
+              <svg class="icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M19 12H5M11 18l-6-6 6-6" />
+              </svg>
+              Voltar
+            </button>
+            <span class="page-kicker">Informações &amp; Confirmação</span>
+          </div>
+
+          <header class="page3-header">
+            <h2 class="page3-title">Celebraremos com você</h2>
+          </header>
+
+          <div class="action-stack">
+            <!-- 1. CONFIRME SUA PRESENÇA -->
+            <section class="action-block" aria-labelledby="heading-rsvp">
+              <h3 class="block-heading" id="heading-rsvp">1. CONFIRME SUA PRESENÇA</h3>
+              <p class="block-desc">
+                Sua presença tornará nosso jantar ainda mais inesquecível. Toque no botão e confirme pelo WhatsApp: a mensagem já vem pronta, é só enviar.
+              </p>
+
+              <a class="btn-primary" href="https://wa.me/5585997893183?text=Ol%C3%A1!%20Gostaria%20de%20confirmar%20minha%20presen%C3%A7a%20no%20jantar%20de%20casamento%20de%20Gleyciane%20e%20Carleandro%2C%20no%20dia%2004%20de%20dezembro%2C%20%C3%A0s%2019%3A30%20horas%2C%20no%20Espa%C3%A7o%20Viv%27ana." target="_blank" rel="noopener noreferrer">
+                <svg class="icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                </svg>
+                CONFIRME SUA PRESENÇA
+              </a>
+            </section>
+
+            <!-- 2. LOCALIZAÇÃO DO EVENTO -->
+            <section class="action-block" aria-labelledby="heading-location">
+              <h3 class="block-heading" id="heading-location">2. LOCALIZAÇÃO DO EVENTO</h3>
+              <p class="block-desc">
+                O jantar de casamento será realizado no <strong>Espaço Viv'ana</strong>, no dia 04 de dezembro, às 19:30 horas.
+              </p>
+
+              <a class="btn-secondary" href="https://maps.app.goo.gl/GL53sVvhiCEngpkQA" target="_blank" rel="noopener noreferrer">
+                <svg class="icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10z" />
+                  <circle cx="12" cy="11" r="2.2" />
+                </svg>
+                VER LOCALIZAÇÃO
+              </a>
+            </section>
+
+            <!-- 3. PRESENTE AOS NOIVOS -->
+            <section class="action-block" aria-labelledby="heading-gift">
+              <h3 class="block-heading" id="heading-gift">3. PRESENTE AOS NOIVOS</h3>
+              <p class="block-desc">
+                Caso deseje nos presentear, disponibilizamos nossa chave PIX:
+              </p>
+
+              <div class="pix-plate">
+                <div class="pix-grid">
+                  <div class="pix-item">
+                    <span class="detail-label">Chave PIX (telefone)</span>
+                    <span class="pix-key-value">+55 85 99789-3183</span>
+                  </div>
+                  <div class="pix-item">
+                    <span class="detail-label">Banco</span>
+                    <span class="pix-key-value">Nubank</span>
+                  </div>
+                </div>
+
+                <button type="button" class="btn-teal" id="btn-copy-pix" onclick="copyPixKey()">
+                  <svg class="icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <rect x="9" y="9" width="13" height="13" rx="2" />
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                  </svg>
+                  COPIAR CHAVE PIX
+                </button>
+
+                <p class="feedback-msg" id="feedback-pix" role="status"></p>
+              </div>
+            </section>
+          </div>
+
+          <footer class="page3-footer">
+            <span class="footer-script">Gleyciane &amp; Carleandro</span>
+            <p class="page-kicker">Esperamos por você no dia 04 de dezembro</p>
+            <button type="button" class="btn-back" onclick="goToPage(1)">
+              Voltar ao início
+            </button>
+          </footer>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    let currentPage = 1;
+    const totalPages = 3;
+    const feedbackTimers = {};
+
+    function goToPage(pageNum) {
+      if (pageNum < 1 || pageNum > totalPages) return;
+      currentPage = pageNum;
+
+      for (let i = 1; i <= totalPages; i++) {
+        const pageEl = document.getElementById(`page-${i}`);
+        const navEl = document.getElementById(`nav-step-${i}`);
+        if (!pageEl) continue;
+
+        if (i === pageNum) {
+          pageEl.classList.add(`is-active`);
+          pageEl.setAttribute(`aria-hidden`, `false`);
+          requestAnimationFrame(function () {
+            pageEl.classList.add(`is-visible`);
+          });
+          if (navEl) navEl.setAttribute(`aria-current`, `step`);
+        } else {
+          pageEl.classList.remove(`is-visible`);
+          pageEl.classList.remove(`is-active`);
+          pageEl.setAttribute(`aria-hidden`, `true`);
+          if (navEl) navEl.removeAttribute(`aria-current`);
+        }
+      }
+
+      window.scrollTo({ top: 0, behavior: `smooth` });
+    }
+
+    function writeClipboardText(text) {
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === `function`) {
+        return navigator.clipboard.writeText(text).catch(function () {
+          return fallbackCopyText(text);
+        });
+      }
+      return Promise.resolve(fallbackCopyText(text));
+    }
+
+    function fallbackCopyText(text) {
+      const helper = document.createElement(`textarea`);
+      helper.value = text;
+      helper.setAttribute(`readonly`, ``);
+      helper.style.position = `fixed`;
+      helper.style.left = `-9999px`;
+      document.body.appendChild(helper);
+      helper.select();
+      let copied = false;
+      try {
+        copied = document.execCommand(`copy`);
+      } catch (err) {
+        copied = false;
+      }
+      document.body.removeChild(helper);
+      return copied;
+    }
+
+    function showFeedback(feedbackId, buttonId, message, tempLabel) {
+      const feedbackEl = document.getElementById(feedbackId);
+      const buttonEl = document.getElementById(buttonId);
+
+      if (feedbackEl) {
+        feedbackEl.textContent = message;
+        feedbackEl.classList.add(`is-shown`);
+      }
+
+      if (buttonEl) {
+        if (!buttonEl.dataset.originalHtml) {
+          buttonEl.dataset.originalHtml = buttonEl.innerHTML;
+        }
+        buttonEl.classList.add(`btn-success-state`);
+        if (tempLabel) {
+          buttonEl.textContent = tempLabel;
+        }
+      }
+
+      if (feedbackTimers[feedbackId]) {
+        clearTimeout(feedbackTimers[feedbackId]);
+      }
+
+      feedbackTimers[feedbackId] = setTimeout(function () {
+        if (feedbackEl) feedbackEl.classList.remove(`is-shown`);
+        if (buttonEl && buttonEl.dataset.originalHtml) {
+          buttonEl.innerHTML = buttonEl.dataset.originalHtml;
+          buttonEl.classList.remove(`btn-success-state`);
+        }
+      }, 3200);
+    }
+
+    function copyPixKey() {
+      const pixKey = `+5585997893183`;
+      writeClipboardText(pixKey).then(function () {
+        showFeedback(
+          `feedback-pix`,
+          `btn-copy-pix`,
+          `Chave PIX +5585997893183 copiada para a área de transferência.`,
+          `CHAVE PIX COPIADA ✓`
+        );
+      });
+    }
+  </script>
+</body>
+</html>
